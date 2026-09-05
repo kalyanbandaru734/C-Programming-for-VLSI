@@ -49,7 +49,7 @@ The project demonstrates:
 08_Structures/
 09_Bitwise_Operators/
 10_Memory_Concepts/
-06_VLSI_Register_Simulator/
+11_8-bit_Register_Simulator/
 ```
 
 ## Goal

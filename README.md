@@ -34,8 +34,7 @@ The project demonstrates:
 - Pointer-based register manipulation
 - Binary and hexadecimal representation
 
-[View 8-bit Register Manipulation Simulator](06_VLSI_Register_Simulator/)
-
+[View 8-bit Register Manipulation Simulator](11_8-bit_Register_Simulator/)
 ## Repository Structure
 
 ```text

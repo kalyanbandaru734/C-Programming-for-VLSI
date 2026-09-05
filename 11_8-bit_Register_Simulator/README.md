@@ -88,7 +88,7 @@ The program produces an interactive terminal-based output showing the current re
 - Add multiple registers
 - Add status flags
 - Add simulated memory-mapped registers
-- Add a graphical interface
+- Add a graphical interface.
 
 ## Author
 

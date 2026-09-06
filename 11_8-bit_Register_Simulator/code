@@ -1,0 +1,131 @@
+#include <stdio.h>
+#include <stdint.h>
+
+void display_register(uint8_t reg)
+{
+    printf("Register: ");
+
+    for (int i = 7; i >= 0; i--)
+        printf("%d", (reg >> i) & 1U);
+
+    printf("  (0x%02X / %u)\n", reg, reg);
+}
+
+void set_bit(uint8_t *reg, int bit)
+{
+    *reg |= (uint8_t)(1U << bit);
+}
+
+void clear_bit(uint8_t *reg, int bit)
+{
+    *reg &= (uint8_t)~(1U << bit);
+}
+
+void toggle_bit(uint8_t *reg, int bit)
+{
+    *reg ^= (uint8_t)(1U << bit);
+}
+
+void read_bit(uint8_t reg, int bit)
+{
+    printf("Bit %d = %u\n", bit, (reg >> bit) & 1U);
+}
+
+int valid_bit(int bit)
+{
+    return bit >= 0 && bit <= 7;
+}
+
+int main(void)
+{
+    uint8_t reg = 0;
+    int choice, bit, value;
+
+    printf("====================================\n");
+    printf("     8-BIT REGISTER SIMULATOR\n");
+    printf("====================================\n");
+
+    while (1)
+    {
+        printf("\n");
+        display_register(reg);
+
+        printf("\n1. Set Bit\n");
+        printf("2. Clear Bit\n");
+        printf("3. Toggle Bit\n");
+        printf("4. Read Bit\n");
+        printf("5. Write Register\n");
+        printf("6. Exit\n");
+
+        printf("\nEnter choice: ");
+        if (scanf("%d", &choice) != 1)
+            return 1;
+
+        switch (choice)
+        {
+            case 1:
+                printf("Enter bit position (0-7): ");
+                scanf("%d", &bit);
+                if (valid_bit(bit))
+                {
+                    set_bit(&reg, bit);
+                    printf("Bit %d SET successfully.\n", bit);
+                }
+                else
+                    printf("Invalid bit position.\n");
+                break;
+
+            case 2:
+                printf("Enter bit position (0-7): ");
+                scanf("%d", &bit);
+                if (valid_bit(bit))
+                {
+                    clear_bit(&reg, bit);
+                    printf("Bit %d CLEARED successfully.\n", bit);
+                }
+                else
+                    printf("Invalid bit position.\n");
+                break;
+
+            case 3:
+                printf("Enter bit position (0-7): ");
+                scanf("%d", &bit);
+                if (valid_bit(bit))
+                {
+                    toggle_bit(&reg, bit);
+                    printf("Bit %d TOGGLED successfully.\n", bit);
+                }
+                else
+                    printf("Invalid bit position.\n");
+                break;
+
+            case 4:
+                printf("Enter bit position (0-7): ");
+                scanf("%d", &bit);
+                if (valid_bit(bit))
+                    read_bit(reg, bit);
+                else
+                    printf("Invalid bit position.\n");
+                break;
+
+            case 5:
+                printf("Enter register value (0-255): ");
+                scanf("%d", &value);
+                if (value >= 0 && value <= 255)
+                {
+                    reg = (uint8_t)value;
+                    printf("Register updated successfully.\n");
+                }
+                else
+                    printf("Value must be between 0 and 255.\n");
+                break;
+
+            case 6:
+                printf("\nExiting simulator...\n");
+                return 0;
+
+            default:
+                printf("Invalid choice.\n");
+        }
+    }
+}
